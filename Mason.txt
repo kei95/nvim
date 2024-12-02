@@ -1,0 +1,6 @@
+- typescript-language-server
+- eslint_d 
+- prettier
+- shfmt
+- stylua
+- lua-language-server
