@@ -1,5 +1,8 @@
 ## Get started
 - install Neovim (`brew install neovim`)
-- create `~/.config/nvim` directory
-- clone this repo under the directory above
+- clone this repo under `~/.config`
 - You are good to go 🎉
+
+## Language Servers
+- Command `:Mason`
+- Select Items mentioned in the txt file
