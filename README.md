@@ -8,7 +8,7 @@
 - Select Items mentioned in the txt file
 
 ## Telescope (file/code search)
-- Install `ripgrep` (`brew install ripgrep`)
+- Install `brew install ripgrep`
 - Install `brew install fd`
 
 ## Copilot
