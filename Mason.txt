@@ -4,3 +4,4 @@
 - shfmt
 - stylua
 - lua-language-server
+- json-lsp
