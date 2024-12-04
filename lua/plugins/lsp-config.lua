@@ -33,6 +33,7 @@ return {
 			vim.keymap.set("n", "K", vim.lsp.buf.hover, {})
 			vim.keymap.set("n", "gd", vim.lsp.buf.definition, {})
 			vim.keymap.set({ "n", "v" }, "<leader>ca", vim.lsp.buf.code_action, {})
+			vim.keymap.set("n", "<C-2>", vim.lsp.buf.rename, { desc = "Rename symbol (LSP)" }) -- Add this line for F2 rename
 		end,
 	},
 }
