@@ -37,6 +37,9 @@ return {
       vim.keymap.set("n", "gd", vim.lsp.buf.definition, {})
       vim.keymap.set({ "n", "v" }, "<leader>ca", vim.lsp.buf.code_action, {})
       vim.keymap.set("n", "<C-2>", vim.lsp.buf.rename, { desc = "Rename symbol (LSP)" }) -- Add this line for F2 rename
+      vim.keymap.set("n", "<C-k>", vim.diagnostic.open_float, { desc = "Peek LSP Error" })
+      vim.keymap.set("n", "n[", vim.diagnostic.goto_prev, { desc = "Go to previous diagnostic" })
+      vim.keymap.set("n", "n]", vim.diagnostic.goto_next, { desc = "Go to next diagnostic" })
     end,
   },
 }
