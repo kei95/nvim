@@ -16,6 +16,11 @@ return {
 						"node_modules",
 						"%.lock$",
 					},
+					pickers = {
+						find_files = {
+							hidden = true, -- Include hidden files
+						},
+					},
 				},
 				extensions = {
 					["ui-select"] = {

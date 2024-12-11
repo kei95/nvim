@@ -10,6 +10,7 @@ return {
     filesystem = {
       filtered_items = {
         hide_dotfiles = false, -- Do not hide dotfiles (e.g., .gitignore, .env)
+        hide_gitignored = false,
         never_show = { ".git", ".git/*" }, -- Hide .git and its contents
       },
     },
