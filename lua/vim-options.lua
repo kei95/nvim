@@ -6,7 +6,8 @@ vim.g.mapleader = " "
 vim.g.background = "light"
 vim.opt.swapfile = false
 vim.api.nvim_set_option("clipboard", "unnamed")
--- To jump around splitted windows
+vim.o.encoding = "utf-8"
+vim.opt.fileencodings = { "utf-8" }
 
 vim.keymap.set('n', '<leader>h', '<C-w>h', { noremap = true, silent = true }) -- Move to the left split
 vim.keymap.set('n', '<leader>j', '<C-w>j', { noremap = true, silent = true }) -- Move to the split below
