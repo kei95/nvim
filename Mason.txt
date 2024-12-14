@@ -5,3 +5,4 @@
 - stylua
 - lua-language-server
 - json-lsp
+- vue-language-server (ONLY IF YOU NEED VUE) 
