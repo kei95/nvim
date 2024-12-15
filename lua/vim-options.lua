@@ -10,6 +10,7 @@ vim.api.nvim_set_option("clipboard", "unnamed")
 vim.api.nvim_set_keymap('t', '<Esc>', '<C-\\><C-n>', { noremap = true, silent = true })
 vim.o.encoding = "utf-8"
 vim.opt.fileencodings = { "utf-8" }
+vim.env.LANG = "en_US.UTF-8"
 
 vim.keymap.set('n', '<leader>h', '<C-w>h', { noremap = true, silent = true }) -- Move to the left split
 vim.keymap.set('n', '<leader>j', '<C-w>j', { noremap = true, silent = true }) -- Move to the split below

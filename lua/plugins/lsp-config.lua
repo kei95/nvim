@@ -35,19 +35,19 @@ return {
       })
 
       -- Uncomment lines below if you every need vue for unfortunate reason
-      -- lspconfig.volar.setup({
-      --   capabilities = capabilities,
-      --   filetypes = { "typescript", "javascript", "javascriptreact", "typescriptreact", "vue" },
-      --   init_options = {
-      --     vue = {
-      --       hybridMode = false,
-      --     },
-      --     typescript = {
-      --       tsdk =
-      --       "/Users/keisuke.yamashite/.local/share/nvim/mason/packages/vue-language-server/node_modules/typescript/lib/",
-      --     },
-      --   },
-      -- })
+      lspconfig.volar.setup({
+        capabilities = capabilities,
+        filetypes = { "typescript", "javascript", "javascriptreact", "typescriptreact", "vue" },
+        init_options = {
+          vue = {
+            hybridMode = false,
+          },
+          typescript = {
+            tsdk =
+            "/Users/keisuke.yamashite/.local/share/nvim/mason/packages/vue-language-server/node_modules/typescript/lib/",
+          },
+        },
+      })
 
       -- Keymaps
       vim.keymap.set("n", "K", vim.lsp.buf.hover, {})
