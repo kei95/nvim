@@ -21,7 +21,7 @@ return {
 			local lspconfig = require("lspconfig")
 
 			-- Uncomment lines below if you every need vue for unfortunate reason
-			-- local mason_registry = require("mason-registry")
+			local mason_registry = require("mason-registry")
 			-- local vue_language_server_path = mason_registry.get_package("vue-language-server"):get_install_path()
 			-- 	.. "/node_modules/@vue/language-server"
 			-- lspconfig.ts_ls.setup({
@@ -45,15 +45,15 @@ return {
 			-- 			hybridMode = true,
 			-- 		},
 			-- 		typescript = {
-   --          -- Make sure to update this path pointing at the global typescript with the same exact version as the one in the project
-			-- 			tsdk = "/Users/keisukey/.nvm/versions/node/v18.16.0/lib/node_modules/typescript/lib",
+			-- 			-- Make sure to update this path pointing at the global typescript with the same exact version as the one in the project
+			-- 			tsdk = vim.fn.trim(vim.fn.system("node -p \"require('path').dirname(require.resolve('typescript'))\"")),
 			-- 		},
 			-- 	},
 			-- })
 			-- ============================================================
 
-      -- Freaking annoying, but when workig on non-Vue project, I need to comment out ts_ls and uncomment the Volar 			
-      lspconfig.ts_ls.setup({
+			-- Freaking annoying, but when workig on non-Vue project, I need to comment out ts_ls and uncomment the Volar
+			lspconfig.ts_ls.setup({
 				capabilities = capabilities,
 			})
 
