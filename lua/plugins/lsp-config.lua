@@ -32,7 +32,7 @@ return {
 			-- 			tsdk = root_tsdk, -- Set the path to the root TypeScript SDK
 			-- 		},
 			-- 		vue = {
-			-- 			hybridMode = true,
+			-- 			hybridMode = false,
 			-- 		},
 			-- 	},
 			-- })
