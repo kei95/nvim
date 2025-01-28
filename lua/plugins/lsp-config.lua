@@ -17,36 +17,22 @@ return {
 		"neovim/nvim-lspconfig",
 		lazy = false,
 		config = function()
-			local capabilities = require("cmp_nvim_lsp").default_capabilities()
 			local lspconfig = require("lspconfig")
+			local capabilities = require("cmp_nvim_lsp").default_capabilities()
 
-			-- Uncomment lines below if you every need vue for unfortunate reason
-			local mason_registry = require("mason-registry")
-			-- local vue_language_server_path = mason_registry.get_package("vue-language-server"):get_install_path()
-			-- 	.. "/node_modules/@vue/language-server"
-			-- lspconfig.ts_ls.setup({
-			-- 	capabilities = capabilities,
-			-- 	init_options = {
-			-- 		plugins = {
-			-- 			{
-			-- 				name = "@vue/typescript-plugin",
-			-- 				location = vue_language_server_path,
-			-- 				languages = { "vue" },
-			-- 			},
-			-- 		},
-			-- 	},
-			-- 	filetypes = { "typescript", "javascript", "javascriptreact", "typescriptreact", "vue" },
-			-- })
+      -- ============================== Volar set up ==============================
+			-- -- Path to the root-level TypeScript installation
+			-- local root_tsdk = vim.fn.getcwd() .. "/node_modules/typescript/lib"
+			--
 			-- lspconfig.volar.setup({
 			-- 	capabilities = capabilities,
 			-- 	filetypes = { "typescript", "javascript", "javascriptreact", "typescriptreact", "vue" },
 			-- 	init_options = {
+			-- 		typescript = {
+			-- 			tsdk = root_tsdk, -- Set the path to the root TypeScript SDK
+			-- 		},
 			-- 		vue = {
 			-- 			hybridMode = true,
-			-- 		},
-			-- 		typescript = {
-			-- 			-- Make sure to update this path pointing at the global typescript with the same exact version as the one in the project
-			-- 			tsdk = vim.fn.trim(vim.fn.system("node -p \"require('path').dirname(require.resolve('typescript'))\"")),
 			-- 		},
 			-- 	},
 			-- })
