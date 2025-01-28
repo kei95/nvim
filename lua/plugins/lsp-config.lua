@@ -20,7 +20,7 @@ return {
 			local capabilities = require("cmp_nvim_lsp").default_capabilities()
 			local lspconfig = require("lspconfig")
 
-			-- Uncomment lines below if you every need vue for unfortunate reason
+			-- -- Uncomment lines below if you every need vue for unfortunate reason
 			-- local mason_registry = require("mason-registry")
 			-- local vue_language_server_path = mason_registry.get_package("vue-language-server"):get_install_path()
 			-- 	.. "/node_modules/@vue/language-server"
@@ -45,7 +45,8 @@ return {
 			-- 			hybridMode = true,
 			-- 		},
 			-- 		typescript = {
-			-- 			tsdk = "/Users/keisuke.yamashite/.local/share/nvim/mason/packages/vue-language-server/node_modules/typescript/lib/",
+   --          -- Make sure to update this path pointing at the global typescript with the same exact version as the one in the project
+			-- 			tsdk = "/Users/keisukey/.nvm/versions/node/v18.16.0/lib/node_modules/typescript/bin",
 			-- 		},
 			-- 	},
 			-- })
