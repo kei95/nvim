@@ -21,7 +21,7 @@ return {
 			local capabilities = require("cmp_nvim_lsp").default_capabilities()
 
 			-- ============================== Volar set up ==============================
-			-- -- Path to the root-level TypeScript installation
+			-- Path to the root-level TypeScript installation
 			-- local root_tsdk = vim.fn.getcwd() .. "/node_modules/typescript/lib"
 			--
 			-- lspconfig.volar.setup({

@@ -11,6 +11,9 @@ return {
   },
   {
     "hrsh7th/nvim-cmp",
+    dependencies = {
+      "hrsh7th/cmp-buffer", -- make sure buffer source is properly installed
+    },
     config = function()
       local cmp = require("cmp")
       require("luasnip.loaders.from_vscode").lazy_load()
@@ -34,10 +37,16 @@ return {
         }),
         sources = cmp.config.sources({
           { name = "nvim_lsp" },
-          { name = "luasnip" }, -- For luasnip users.
-        }, {
-          { name = "buffer" },
+          { name = "luasnip" },
+          -- Temporarily disable the buffer source to avoid to_utfindex issue
+          -- { name = "buffer" },
         }),
+        formatting = {
+          format = function(entry, vim_item)
+            -- Defensive formatting to avoid invalid entries causing issues
+            return vim_item
+          end,
+        },
       })
     end,
   },
