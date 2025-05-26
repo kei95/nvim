@@ -58,9 +58,10 @@ map("n", "O", function()
 end, opts)
 
 -- 💬 Toggle comment
-map("n", "<leader>c", function()
+map("v", "<leader>gc", function()
   vscode.action("editor.action.commentLine")
 end, opts)
-map("v", "<leader>c", function()
-  vscode.action("editor.action.commentLine")
-end, opts)
+
+vim.api.nvim_create_user_command("wa", function()
+  vscode.action("workbench.action.files.saveAll")
+end, {})
