@@ -7,6 +7,8 @@ vim.g.mapleader = " "
 -- Log to confirm it's loaded (optional)
 vim.notify("✅ Loaded vscode-config.lua for Cursor")
 
+vim.api.nvim_set_option("clipboard", "unnamed")
+
 local map = vim.keymap.set
 local opts = { noremap = true, silent = true }
 
@@ -66,3 +68,7 @@ end, opts)
 vim.api.nvim_create_user_command("wa", function()
   vscode.action("workbench.action.files.saveAll")
 end, {})
+
+-- Disable yanking text when deleting 
+vim.keymap.set('n', 'd', '"_d', { noremap = true })
+vim.keymap.set('v', 'd', '"_d', { noremap = true })
