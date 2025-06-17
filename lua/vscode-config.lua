@@ -64,11 +64,6 @@ map("v", "<leader>gc", function()
   vscode.action("editor.action.commentLine")
 end, opts)
 
--- 📝 Save all files
-vim.api.nvim_create_user_command("wa", function()
-  vscode.action("workbench.action.files.saveAll")
-end, {})
-
 -- Disable yanking text when deleting 
 vim.keymap.set('n', 'd', '"_d', { noremap = true })
 vim.keymap.set('v', 'd', '"_d', { noremap = true })
