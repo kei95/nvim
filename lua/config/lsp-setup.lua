@@ -64,12 +64,12 @@ local function setup_lsp_per_project()
     return
   end
 
-  -- Vanilla TS/JS
-  if has_file_with_ext("ts") or has_file_with_ext("js") then
+  -- Vanilla TS/JS or any TypeScript project
+  if has_file_with_ext("ts") or has_file_with_ext("js") or package_has("typescript") or package_has("@types/node") then
     lspconfig.ts_ls.setup({
       capabilities = capabilities,
     })
-    print("🔧 LSP: ts_ls enabled (Vanilla TS/JS project)")
+    print("🔧 LSP: ts_ls enabled (TypeScript/JavaScript project)")
   end
 end
 
