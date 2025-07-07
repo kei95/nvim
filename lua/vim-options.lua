@@ -11,7 +11,6 @@ vim.api.nvim_set_keymap('t', '<Esc>', '<C-\\><C-n>', { noremap = true, silent = 
 vim.o.encoding = "utf-8"
 vim.opt.fileencodings = { "utf-8" }
 vim.env.LANG = "en_US.UTF-8"
-vim.opt.conceallevel = 1
 
 -- Disable yanking text when deleting 
 vim.keymap.set('n', 'd', '"_d', { noremap = true })

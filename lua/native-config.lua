@@ -18,7 +18,6 @@ vim.opt.rtp:prepend(lazypath)
 require("vim-options")
 require("lazy").setup({
 	spec = {
-		-- import your plugins
 		{ import = "plugins" },
 	},
 	-- Configure any other settings here. See the documentation for more details.
@@ -27,3 +26,4 @@ require("lazy").setup({
 	-- automatically check for plugin updates
 	checker = { enabled = true },
 })
+
