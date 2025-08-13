@@ -46,6 +46,11 @@ map("n", "<leader>ne", function()
   vscode.action("workbench.view.explorer")
 end, opts)
 
+-- Peak error/warning messages
+map("n", "<leader>ca", function()
+  vscode.action("editor.action.showHover")
+end, opts)
+
 -- 📜 Show definition preview hover
 map("n", "K", function()
   vscode.action("editor.action.showDefinitionPreviewHover")
