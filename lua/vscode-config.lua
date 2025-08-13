@@ -47,7 +47,7 @@ map("n", "<leader>ne", function()
 end, opts)
 
 -- Peak error/warning messages
-map("n", "<leader>ca", function()
+map("n", "<leader>e", function()
   vscode.action("editor.action.showHover")
 end, opts)
 
