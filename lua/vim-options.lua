@@ -29,3 +29,5 @@ vim.keymap.set("n", "<M-CR>", function()
     print("Not a valid URL: " .. url)
   end
 end, { desc = "Open URL under cursor in browser" })
+
+vim.keymap.set('n', '<leader>n', ':edit<CR>', { noremap = true, silent = true, desc = "Reload current file" })
