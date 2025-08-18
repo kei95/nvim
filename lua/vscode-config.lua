@@ -69,6 +69,11 @@ map("v", "<leader>gc", function()
 	vscode.action("editor.action.commentLine")
 end, opts)
 
+-- ⚡ Quick action (Code actions)
+map("n", "<leader>ca", function()
+	vscode.action("editor.action.quickFix")
+end, opts)
+
 -- Disable yanking text when deleting
 vim.keymap.set("n", "d", '"_d', { noremap = true })
 vim.keymap.set("v", "d", '"_d', { noremap = true })
