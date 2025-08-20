@@ -36,6 +36,21 @@ map("n", "<C-f>", function()
 	vscode.action("workbench.action.quickOpen")
 end, opts)
 
+-- 🔍 File search with Ctrl+P (like Cmd+P)
+map("n", "<C-p>", function()
+	vscode.action("workbench.action.quickOpen")
+end, opts)
+
+-- 🔍 Find in current file (like Cmd+F)
+map("n", "<leader>ff", function()
+	vscode.action("actions.find")
+end, opts)
+
+-- 🔍 Global search in files (like Shift+Cmd+F)
+map("n", "<leader>fg", function()
+	vscode.action("workbench.action.findInFiles")
+end, opts)
+
 -- 🧹 Format document
 map("n", "<leader>gf", function()
 	vscode.action("editor.action.formatDocument")
@@ -72,6 +87,11 @@ end, opts)
 -- ⚡ Quick action (Code actions)
 map("n", "<leader>ca", function()
 	vscode.action("editor.action.quickFix")
+end, opts)
+
+-- ✏️ Rename symbol (same as Fn+F2)
+map("n", "<leader>r", function()
+	vscode.action("editor.action.rename")
 end, opts)
 
 -- Disable yanking text when deleting
