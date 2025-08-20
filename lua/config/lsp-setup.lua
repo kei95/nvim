@@ -40,6 +40,34 @@ local function setup_lsp_per_project()
   -- Detect project root
   local root = vim.loop.cwd() -- safer than vim.fn.getcwd()
 
+  -- Tailwind CSS LSP
+  if package_has("tailwindcss") or file_exists("tailwind.config.js") or file_exists("tailwind.config.ts") then
+    lspconfig.tailwindcss.setup({
+      capabilities = capabilities,
+      filetypes = {
+        "html",
+        "css",
+        "scss",
+        "javascript",
+        "javascriptreact",
+        "typescript",
+        "typescriptreact",
+        "vue",
+        "svelte",
+        "astro",
+      }
+    })
+    print("🔧 LSP: tailwindcss enabled (Tailwind project)")
+  end
+
+  -- Astro project
+  if has_file_with_ext("astro") or package_has("astro") then
+    lspconfig.astro.setup({
+      capabilities = capabilities,
+    })
+    print("🔧 LSP: astro enabled (Astro project)")
+  end
+
   -- Vue project
   if has_file_with_ext("vue") or package_has("vue") then
     lspconfig.volar.setup({
@@ -65,7 +93,12 @@ local function setup_lsp_per_project()
   end
 
   -- Vanilla TS/JS or any TypeScript project
-  if has_file_with_ext("ts") or has_file_with_ext("js") or package_has("typescript") or package_has("@types/node") then
+  if
+      has_file_with_ext("ts")
+      or has_file_with_ext("js")
+      or package_has("typescript")
+      or package_has("@types/node")
+  then
     lspconfig.ts_ls.setup({
       capabilities = capabilities,
     })
