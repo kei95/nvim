@@ -31,3 +31,9 @@ vim.keymap.set("n", "<M-CR>", function()
 end, { desc = "Open URL under cursor in browser" })
 
 vim.keymap.set('n', '<leader>n', ':edit<CR>', { noremap = true, silent = true, desc = "Reload current file" })
+
+-- Window resizing 
+vim.keymap.set('n', '<leader>;', ':resize +5<CR>', { noremap = true, silent = true, desc = "Increase window height by 5" })
+vim.keymap.set('n', "<leader>'", ':resize -5<CR>', { noremap = true, silent = true, desc = "Decrease window height by 5" })
+vim.keymap.set('n', '<leader>,', ':vertical resize -5<CR>', { noremap = true, silent = true, desc = "Decrease window width by 5" })
+vim.keymap.set('n', '<leader>.', ':vertical resize +5<CR>', { noremap = true, silent = true, desc = "Increase window width by 5" })
