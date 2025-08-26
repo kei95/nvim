@@ -61,6 +61,11 @@ map("n", "<leader>ne", function()
 	vscode.action("workbench.view.explorer")
 end, opts)
 
+-- 🌿 Toggle git sidebar
+map("n", "<leader>nb", function()
+	vscode.action("workbench.view.scm")
+end, opts)
+
 -- Peak error/warning messages
 map("n", "<leader>e", function()
 	vscode.action("editor.action.showHover")

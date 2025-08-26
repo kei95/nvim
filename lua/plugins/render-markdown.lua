@@ -8,7 +8,6 @@ return {
         width = "block",
         left_pad = 0,
         right_pad = 4,
-        icons = {},
       },
     })
   end,
