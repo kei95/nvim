@@ -29,8 +29,8 @@ return {
       vim.keymap.set({ "n", "v" }, "<leader>ca", vim.lsp.buf.code_action, { desc = "Open Code action (LSP)" })
       vim.keymap.set("n", "<leader>r", vim.lsp.buf.rename, { desc = "Rename symbol (LSP)" })
       vim.keymap.set("n", "<leader>e", vim.diagnostic.open_float, { desc = "Peek LSP Error" })
-      vim.keymap.set("n", "n[", vim.diagnostic.goto_prev, { desc = "Go to previous diagnostic" })
-      vim.keymap.set("n", "n]", vim.diagnostic.goto_next, { desc = "Go to next diagnostic" })
+      vim.keymap.set("n", "[", vim.diagnostic.goto_prev, { desc = "Go to previous diagnostic" })
+      vim.keymap.set("n", "]", vim.diagnostic.goto_next, { desc = "Go to next diagnostic" })
     end,
   },
 }
