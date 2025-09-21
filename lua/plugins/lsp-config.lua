@@ -9,18 +9,122 @@ return {
   {
     "williamboman/mason-lspconfig.nvim",
     lazy = false,
-    config = function()
-      require("mason-lspconfig").setup({
-        automatic_installation = true,
-        automatic_enable = false,
-      })
-    end,
+    opts = {
+      ensure_installed = {
+        "lua_ls",
+        "ts_ls", 
+        "eslint",
+        "jsonls",
+        "html",
+        "tailwindcss",
+      },
+    },
   },
   {
-    "neovim/nvim-lspconfig",
+    "hrsh7th/cmp-nvim-lsp",
     lazy = false,
     config = function()
-      require("config.lsp-setup").setup_lsp_per_project()
+      local capabilities = require("cmp_nvim_lsp").default_capabilities()
+
+      -- Helper functions for project detection
+      local function file_exists(name)
+        return vim.fn.filereadable(name) == 1
+      end
+
+      local function package_has(dep)
+        local path = "package.json"
+        if not file_exists(path) then return false end
+        local ok, content = pcall(vim.fn.readfile, path)
+        if not ok or not content then return false end
+        local json_ok, json = pcall(vim.fn.json_decode, content)
+        if not json_ok or not json then return false end
+        local all_deps = vim.tbl_deep_extend("force", json.dependencies or {}, json.devDependencies or {})
+        return all_deps[dep] ~= nil
+      end
+
+      -- Configure LSP servers using vim.lsp.config (new API)
+      vim.lsp.config.lua_ls = {
+        cmd = { "lua-language-server" },
+        filetypes = { "lua" },
+        root_markers = { ".luarc.json", ".luarc.jsonc", ".luacheckrc", ".stylua.toml", "stylua.toml", "selene.toml", "selene.yml", ".git" },
+        capabilities = capabilities,
+        settings = {
+          Lua = {
+            telemetry = { enable = false },
+            workspace = { checkThirdParty = false },
+            diagnostics = { globals = { "vim" } },
+          },
+        },
+      }
+
+      vim.lsp.config.ts_ls = {
+        cmd = { "typescript-language-server", "--stdio" },
+        filetypes = { "typescript", "javascript", "typescriptreact", "javascriptreact" },
+        root_markers = { "package.json", "tsconfig.json", ".git" },
+        capabilities = capabilities,
+      }
+
+      vim.lsp.config.eslint = {
+        cmd = { "vscode-eslint-language-server", "--stdio" },
+        filetypes = { "javascript", "javascriptreact", "typescript", "typescriptreact" },
+        root_markers = { ".eslintrc", ".eslintrc.js", ".eslintrc.json", ".eslintrc.cjs", "eslint.config.js", "package.json", ".git" },
+        capabilities = capabilities,
+        root_dir = function(fname)
+          if type(fname) == "number" then
+            fname = vim.api.nvim_buf_get_name(fname)
+          end
+          if not fname or fname == "" then
+            return vim.fn.getcwd()
+          end
+          
+          local markers = { ".eslintrc", ".eslintrc.js", ".eslintrc.json", ".eslintrc.cjs", "eslint.config.js", "package.json", ".git" }
+          local start = vim.fs.dirname(fname)
+          local found = vim.fs.find(markers, { path = start, upward = true })[1]
+          return found and vim.fs.dirname(found) or vim.fn.getcwd()
+        end,
+        settings = {
+          eslint = {
+            workingDirectory = { mode = "location" },
+            validate = "on"
+          }
+        },
+      }
+
+      vim.lsp.config.jsonls = {
+        cmd = { "vscode-json-language-server", "--stdio" },
+        filetypes = { "json", "jsonc" },
+        root_markers = { "package.json", ".git" },
+        capabilities = capabilities,
+      }
+
+      vim.lsp.config.html = {
+        cmd = { "vscode-html-language-server", "--stdio" },
+        filetypes = { "html" },
+        root_markers = { "package.json", ".git" },
+        capabilities = capabilities,
+      }
+
+      -- Conditional Tailwind CSS LSP
+      if package_has("tailwindcss") or file_exists("tailwind.config.js") or file_exists("tailwind.config.ts") then
+        vim.lsp.config.tailwindcss = {
+          cmd = { "tailwindcss-language-server", "--stdio" },
+          filetypes = { "html", "css", "scss", "javascript", "javascriptreact", "typescript", "typescriptreact" },
+          root_markers = { "tailwind.config.js", "tailwind.config.ts", "tailwind.config.cjs", "package.json", ".git" },
+          capabilities = capabilities,
+        }
+        vim.schedule(function() vim.notify("🔧 LSP: tailwindcss enabled (Tailwind project)") end)
+      end
+
+      -- Conditional LSP setup for Astro
+      if package_has("astro") or vim.fn.glob("*.astro") ~= "" then
+        vim.lsp.config.astro = {
+          cmd = { "astro-language-server", "--stdio" },
+          filetypes = { "astro" },
+          root_markers = { "astro.config.mjs", "astro.config.js", "package.json", ".git" },
+          capabilities = capabilities,
+        }
+        vim.schedule(function() vim.notify("🔧 LSP: astro enabled (Astro project)") end)
+      end
 
       -- LSP-related keymaps
       vim.keymap.set("n", "K", vim.lsp.buf.hover, {})
