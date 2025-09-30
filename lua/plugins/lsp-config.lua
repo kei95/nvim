@@ -12,8 +12,7 @@ return {
     opts = {
       ensure_installed = {
         "lua_ls",
-        "ts_ls", 
-        "eslint",
+        "ts_ls",
         "jsonls",
         "html",
         "tailwindcss",
@@ -62,31 +61,13 @@ return {
         filetypes = { "typescript", "javascript", "typescriptreact", "javascriptreact" },
         root_markers = { "package.json", "tsconfig.json", ".git" },
         capabilities = capabilities,
-      }
-
-      vim.lsp.config.eslint = {
-        cmd = { "vscode-eslint-language-server", "--stdio" },
-        filetypes = { "javascript", "javascriptreact", "typescript", "typescriptreact" },
-        root_markers = { ".eslintrc", ".eslintrc.js", ".eslintrc.json", ".eslintrc.cjs", "eslint.config.js", "package.json", ".git" },
-        capabilities = capabilities,
-        root_dir = function(fname)
-          if type(fname) == "number" then
-            fname = vim.api.nvim_buf_get_name(fname)
-          end
-          if not fname or fname == "" then
-            return vim.fn.getcwd()
-          end
-          
-          local markers = { ".eslintrc", ".eslintrc.js", ".eslintrc.json", ".eslintrc.cjs", "eslint.config.js", "package.json", ".git" }
-          local start = vim.fs.dirname(fname)
-          local found = vim.fs.find(markers, { path = start, upward = true })[1]
-          return found and vim.fs.dirname(found) or vim.fn.getcwd()
-        end,
         settings = {
-          eslint = {
-            workingDirectory = { mode = "location" },
-            validate = "on"
-          }
+          typescript = {
+            format = { enable = false }, -- Disable LSP formatting
+          },
+          javascript = {
+            format = { enable = false }, -- Disable LSP formatting
+          },
         },
       }
 
