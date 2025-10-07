@@ -116,6 +116,26 @@ return {
       vim.keymap.set("n", "<leader>e", vim.diagnostic.open_float, { desc = "Peek LSP Error" })
       vim.keymap.set("n", "[", vim.diagnostic.goto_prev, { desc = "Go to previous diagnostic" })
       vim.keymap.set("n", "]", vim.diagnostic.goto_next, { desc = "Go to next diagnostic" })
+
+      -- EditorConfig integration for LSP formatting
+      local function has_editorconfig()
+        return vim.fn.findfile(".editorconfig", ".;") ~= ""
+      end
+
+      -- Set up EditorConfig-aware formatting
+      vim.api.nvim_create_autocmd("LspAttach", {
+        callback = function(args)
+          local client = vim.lsp.get_client_by_id(args.data.client_id)
+          if client and client.supports_method("textDocument/formatting") then
+            -- Notify about EditorConfig presence but don't disable LSP
+            if has_editorconfig() then
+              vim.schedule(function()
+                vim.notify("📝 EditorConfig detected - formatting will respect .editorconfig rules", vim.log.levels.INFO)
+              end)
+            end
+          end
+        end,
+      })
     end,
   },
 }

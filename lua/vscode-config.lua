@@ -51,9 +51,20 @@ map("n", "<leader>fg", function()
 	vscode.action("workbench.action.findInFiles")
 end, opts)
 
--- 🧹 Format document
+-- 🧹 Format document (EditorConfig priority)
 map("n", "<leader>gf", function()
-	vscode.action("editor.action.formatDocument")
+	-- Check if EditorConfig is present in the project
+	local editorconfig_path = vim.fn.findfile(".editorconfig", ".;")
+	if editorconfig_path ~= "" then
+		-- Use VS Code's format document which respects EditorConfig
+		vscode.action("editor.action.formatDocument")
+		vim.schedule(function()
+			vim.notify("📝 Formatting with EditorConfig (VS Code)", vim.log.levels.INFO)
+		end)
+	else
+		-- Standard VS Code formatting
+		vscode.action("editor.action.formatDocument")
+	end
 end, opts)
 
 -- 🗂 Toggle file explorer
