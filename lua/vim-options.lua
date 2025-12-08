@@ -12,6 +12,11 @@ vim.o.encoding = "utf-8"
 vim.opt.fileencodings = { "utf-8" }
 vim.env.LANG = "en_US.UTF-8"
 
+vim.opt.number = true
+vim.opt.cursorline = true
+vim.opt.cursorcolumn = true
+vim.opt.visualbell = true
+
 -- Disable yanking text when deleting 
 vim.keymap.set('n', 'd', '"_d', { noremap = true })
 vim.keymap.set('v', 'd', '"_d', { noremap = true })
@@ -37,3 +42,7 @@ vim.keymap.set('n', '<leader>;', ':resize -5<CR>', { noremap = true, silent = tr
 vim.keymap.set('n', "<leader>'", ':resize +5<CR>', { noremap = true, silent = true, desc = "Decrease window height by 5" })
 vim.keymap.set('n', '<leader>,', ':vertical resize +5<CR>', { noremap = true, silent = true, desc = "Increase window width by 5" })
 vim.keymap.set('n', '<leader>.', ':vertical resize -5<CR>', { noremap = true, silent = true, desc = "Decrease window width by 5" })
+
+-- Load auto-reload configuration
+require('util.auto-reload')
+
