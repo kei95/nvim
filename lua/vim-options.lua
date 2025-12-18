@@ -49,4 +49,3 @@ vim.keymap.set('n', '<leader>.', ':vertical resize -5<CR>', { noremap = true, si
 
 -- Load auto-reload configuration
 require('util.auto-reload')
-
