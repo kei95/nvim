@@ -21,9 +21,9 @@ In order to use copilot, make sure to log into Github with an account with copil
 - Command `:Copilot setup`
 - Follow the instructions
 
-## Vue support
+## Image Rendering
 
-If you wanted to support Vue, make sure to install vue-language-server with Mason. Also, npm registry should be set to `https://registry.npmjs.org/` to install the right package. 
+- Install `brew install imagemagick`
 
 ## VS Code support
 

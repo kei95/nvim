@@ -26,6 +26,10 @@ vim.keymap.set('n', '<leader>j', '<C-w>j', { noremap = true, silent = true }) --
 vim.keymap.set('n', '<leader>k', '<C-w>k', { noremap = true, silent = true }) -- Move to the split above
 vim.keymap.set('n', '<leader>l', '<C-w>l', { noremap = true, silent = true }) -- Move to the right split
 
+-- Move between tabs
+vim.keymap.set("n", "<Tab>", "gt")
+vim.keymap.set("n", "<S-Tab>", "gT")
+
 vim.keymap.set("n", "<M-CR>", function()
   local url = vim.fn.expand("<cfile>")
   if url:match("^https?://") then
