@@ -22,30 +22,32 @@ return {
 				return vim.fn.findfile(".editorconfig", ".;") ~= ""
 			end
 
-			-- Configure sources based on EditorConfig presence
-			local sources = {}
-			
-			if has_editorconfig() then
-				-- When EditorConfig is present, use it as primary formatter
-				-- Add other formatters as fallbacks only
-				sources = {
-					null_ls.builtins.formatting.stylua,
-					null_ls.builtins.formatting.prettier,
-					require("none-ls.formatting.eslint_d"),
-					require("none-ls.diagnostics.eslint_d"),
-				}
-				vim.schedule(function()
-					vim.notify("📝 EditorConfig detected - using as primary formatter", vim.log.levels.INFO)
-				end)
-			else
-				-- When no EditorConfig, use standard formatters
-				sources = {
-					null_ls.builtins.formatting.stylua,
-					null_ls.builtins.formatting.prettier,
-					require("none-ls.formatting.eslint_d"),
-					require("none-ls.diagnostics.eslint_d"),
-				}
+			-- Condition: only run eslint_d when eslint config exists
+			local eslint_condition = function(utils)
+				return utils.root_has_file({
+					".eslintrc",
+					".eslintrc.js",
+					".eslintrc.cjs",
+					".eslintrc.json",
+					".eslintrc.yml",
+					".eslintrc.yaml",
+					"eslint.config.js",
+					"eslint.config.mjs",
+					"eslint.config.cjs",
+				})
 			end
+
+			-- Configure sources
+			local sources = {
+				null_ls.builtins.formatting.stylua,
+				null_ls.builtins.formatting.prettier,
+				require("none-ls.formatting.eslint_d").with({
+					condition = eslint_condition,
+				}),
+				require("none-ls.diagnostics.eslint_d").with({
+					condition = eslint_condition,
+				}),
+			}
 
 			null_ls.setup({
 				sources = sources,
@@ -56,16 +58,16 @@ return {
 				-- Check if EditorConfig is present
 				if has_editorconfig() then
 					-- When EditorConfig is present, try null-ls first
-					local success, err = pcall(function()
-						vim.lsp.buf.format({ 
+					local success, _ = pcall(function()
+						vim.lsp.buf.format({
 							async = true,
 							filter = function(client)
 								-- Prefer null-ls when EditorConfig is present
 								return client.name == "null-ls"
-							end
+							end,
 						})
 					end)
-					
+
 					if success then
 						vim.schedule(function()
 							vim.notify("📝 Formatting with EditorConfig via null-ls", vim.log.levels.INFO)
