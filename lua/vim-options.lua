@@ -47,5 +47,10 @@ vim.keymap.set('n', "<leader>'", ':resize +5<CR>', { noremap = true, silent = tr
 vim.keymap.set('n', '<leader>,', ':vertical resize +5<CR>', { noremap = true, silent = true, desc = "Increase window width by 5" })
 vim.keymap.set('n', '<leader>.', ':vertical resize -5<CR>', { noremap = true, silent = true, desc = "Decrease window width by 5" })
 
+-- Format document
+vim.keymap.set('n', '<leader>cf', function()
+  vim.lsp.buf.format()
+end, { noremap = true, silent = true, desc = "Format document" })
+
 -- Load auto-reload configuration
 require('util.auto-reload')

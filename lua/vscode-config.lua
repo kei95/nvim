@@ -15,16 +15,16 @@ local opts = { noremap = true, silent = true }
 -- 🧭 Window navigation using VS Code commands
 local ok, vscode = pcall(require, "vscode")
 if ok then
-	map("n", "<leader>h", function()
+	map("n", "<C-h>", function()
 		vscode.action("workbench.action.focusLeftGroup")
 	end, opts)
-	map("n", "<leader>j", function()
+	map("n", "<C-j>", function()
 		vscode.action("workbench.action.focusBelowGroup")
 	end, opts)
-	map("n", "<leader>k", function()
+	map("n", "<C-k>", function()
 		vscode.action("workbench.action.focusAboveGroup")
 	end, opts)
-	map("n", "<leader>l", function()
+	map("n", "<C-l>", function()
 		vscode.action("workbench.action.focusRightGroup")
 	end, opts)
 else
@@ -49,6 +49,11 @@ end, opts)
 -- 🔍 Global search in files (like Shift+Cmd+F)
 map("n", "<leader>fg", function()
 	vscode.action("workbench.action.findInFiles")
+end, opts)
+
+-- 🧹 Format document
+map("n", "<leader>cf", function()
+	vscode.action("editor.action.formatDocument")
 end, opts)
 
 -- 🧹 Format document (EditorConfig priority)
