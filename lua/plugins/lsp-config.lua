@@ -15,6 +15,7 @@ return {
         "ts_ls",
         "jsonls",
         "html",
+        "cssls",
         "tailwindcss",
       },
     },
@@ -81,6 +82,13 @@ return {
       vim.lsp.config.html = {
         cmd = { "vscode-html-language-server", "--stdio" },
         filetypes = { "html" },
+        root_markers = { "package.json", ".git" },
+        capabilities = capabilities,
+      }
+
+      vim.lsp.config.cssls = {
+        cmd = { "vscode-css-language-server", "--stdio" },
+        filetypes = { "css", "scss", "less" },
         root_markers = { "package.json", ".git" },
         capabilities = capabilities,
       }

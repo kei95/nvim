@@ -7,14 +7,22 @@ return {
 	},
 	{
 		"nvim-telescope/telescope.nvim",
-		tag = "0.1.5",
+		branch = "master",
 		dependencies = { "nvim-lua/plenary.nvim" },
 		config = function()
+			local actions = require("telescope.actions")
 			require("telescope").setup({
 				defaults = {
 					file_ignore_patterns = {
 						"node_modules",
 						"%.lock$",
+					},
+					mappings = {
+						i = {
+							["<C-v>"] = function()
+								vim.api.nvim_put({ vim.fn.getreg("+") }, "c", false, true)
+							end,
+						},
 					},
 					pickers = {
 						find_files = {
