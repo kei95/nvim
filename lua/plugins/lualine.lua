@@ -1,10 +1,12 @@
 return {
   "nvim-lualine/lualine.nvim",
+  dependencies = { "catppuccin/nvim" },
+  event = "VeryLazy",
   config = function()
     require('lualine').setup({
-	    options = {
-	      theme = 'catppuccin'
-	    }
-})
+      options = {
+        theme = 'auto'
+      }
+    })
   end
 }
