@@ -13,4 +13,7 @@ return {
   keys = {
     { "<leader>gg", "<cmd>LazyGit<cr>", desc = "LazyGit" },
   },
+  config = function()
+    vim.keymap.set("n", "<leader>gg", ":LazyGit<CR>", { desc = "Open LazyGit" })
+  end,
 }
